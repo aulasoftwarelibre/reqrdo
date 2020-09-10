@@ -41,6 +41,7 @@ export const CircularProgressBar: React.FunctionComponent<Props> = ({
           x={180}
           y={160}
           text={counter.toString()}
+          fill={'white'}
           fontSize={80}
           fontStyle={'bold'}
           fontFamily={'Lato'}
