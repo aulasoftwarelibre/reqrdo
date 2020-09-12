@@ -13,6 +13,9 @@ module.exports = {
           light: '#FD5B71',
           dark: '#1F0D20',
         },
+        purple: {
+          dark: '#292639',
+        },
       },
       fontFamily: {
         sans: ['Lato', ...defaultTheme.fontFamily.sans],
