@@ -61,5 +61,3 @@ export const CircularProgressBar: React.FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default CircularProgressBar;
