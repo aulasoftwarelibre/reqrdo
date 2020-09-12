@@ -1,1 +1,1 @@
-export { default } from './CircularProgressBar';
+export { CircularProgressBar } from './CircularProgressBar';

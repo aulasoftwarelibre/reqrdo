@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 
-import CircularProgressBar, { Props } from './CircularProgressBar';
+import { CircularProgressBar, Props } from './CircularProgressBar';
 
 export default {
   component: CircularProgressBar,
