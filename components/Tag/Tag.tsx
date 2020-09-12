@@ -9,7 +9,7 @@ export interface Props {
 
 export const Tag: React.FunctionComponent<Props> = ({ type, text }) => {
   const classes = classnames({
-    'inline-block text-base px-3 py-1 mr-2 mb-2 rounded-lg': true,
+    'inline-block text-xs sm:text-base px-2 sm:px-3 py-1 mr-1 sm:mr-2 sm:mb-2 rounded-lg': true,
     'bg-green-dark text-green-light': type === 'green',
     'bg-red-dark text-red-light': type === 'red',
   });

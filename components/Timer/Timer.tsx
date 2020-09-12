@@ -13,11 +13,13 @@ export const Timer: React.FunctionComponent<Props> = ({
   const duration = moment.duration(moment(to).diff(moment(from)));
 
   return (
-    <div className="inline-block text-white font-black text-5xl m-2 p-2">
+    <div className="inline-block text-white text-center font-black text-2xl sm:text-5xl p-2">
       {duration.hours().toString().padStart(2, '0')}
-      <span className="text-3xl text-white text-opacity-25 pr-2">h</span>
+      <span className="text-xl sm:text-3xl text-white text-opacity-25 pr-2">
+        h
+      </span>
       {duration.minutes().toString().padStart(2, '0')}
-      <span className="text-3xl text-white text-opacity-25">m</span>
+      <span className="text-xl sm:text-3xl text-white text-opacity-25">m</span>
     </div>
   );
 };

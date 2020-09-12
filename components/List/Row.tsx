@@ -18,25 +18,24 @@ export const Row: React.FunctionComponent<Props> = ({
 }) => {
   return (
     <div
-      className="flex bg-purple-dark shadow-lg rounded-lg md:mx-auto"
+      className="flex bg-purple-dark shadow-lg rounded-lg md:mx-auto px-3 py-4 sm:px-6 sm:py-4"
       data-testid="row"
     >
-      <div className="flex flex-grow items-start px-4 py-6">
+      <div className="flex-shrink-0">
         <img
-          className="w-14 h-14 rounded-full object-cover mr-4 mt-2 shadow"
+          className="w-14 h-14 rounded-full mr-4 mt-2 shadow"
           src={image ?? 'assets/img/avatar.svg'}
           alt="avatar"
-          data-testid={image ? 'image' : 'no-image'}
-        ></img>
-        <div className="flex-col items-start">
-          <div className="flex justify-between">
-            <h2 className="text-lg font-semibold text-white my-1">{name} </h2>
-          </div>
-          <Tag type="green" text={from}></Tag>
-          {to && <Tag type="red" text={to} data-testid="toDate"></Tag>}
-        </div>
+        />
       </div>
-      <div className="flex items-end mr-3">
+      <div className="flex-grow ml-4 truncate">
+        <div className="text-base sm:text-lg truncate font-semibold text-white my-1">
+          {name}
+        </div>
+        <Tag type="green" text={from}></Tag>
+        {to && <Tag type="red" text={to}></Tag>}
+      </div>
+      <div className="sm:mr-3">
         <Timer from={from} to={to}></Timer>
       </div>
     </div>

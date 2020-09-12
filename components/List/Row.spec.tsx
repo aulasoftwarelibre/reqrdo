@@ -7,15 +7,24 @@ describe('Row', () => {
   it('should render correctly', () => {
     render(<Default {...(Default.args as Props)}></Default>);
     expect(screen.getByTestId('row'));
+    expect(screen.getByRole('img')).not.toHaveAttribute(
+      'src',
+      'assets/img/avatar.svg'
+    );
+    expect(screen.queryAllByTestId('tag')).toHaveLength(2);
   });
 
   it('should render default avatar if image is not provided', () => {
     render(<NoAvatar {...(NoAvatar.args as Props)}></NoAvatar>);
-    expect(screen.getByTestId('no-image'));
+    expect(screen.getByRole('img')).toHaveAttribute(
+      'src',
+      'assets/img/avatar.svg'
+    );
+    expect(screen.queryAllByTestId('tag')).toHaveLength(2);
   });
 
-  it('should not render timer if to date is not provided', () => {
+  it('should not render end date if it is not provided', () => {
     render(<NoToDate {...(NoToDate.args as Props)}></NoToDate>);
-    expect(screen.queryAllByTestId('toDate')).toHaveLength(0);
+    expect(screen.queryAllByTestId('tag')).toHaveLength(1);
   });
 });

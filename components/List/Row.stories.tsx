@@ -19,7 +19,7 @@ to.setTime(to.valueOf() - 1000 * 3600 * 3.2);
 
 export const Default = Template.bind({});
 Default.args = {
-  name: faker.name.firstName(),
+  name: faker.name.findName(),
   image: faker.image.avatar(),
   from: from,
   to: to,
@@ -27,7 +27,7 @@ Default.args = {
 
 export const NoAvatar = Template.bind({});
 NoAvatar.args = {
-  name: faker.name.firstName(),
+  name: faker.name.findName(),
   from: from,
   to: to,
 };
@@ -35,6 +35,6 @@ NoAvatar.args = {
 export const NoToDate = Template.bind({});
 NoToDate.args = {
   image: faker.image.avatar(),
-  name: faker.name.firstName(),
+  name: faker.name.findName(),
   from: from,
 };

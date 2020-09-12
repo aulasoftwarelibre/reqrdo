@@ -24,7 +24,7 @@ const sessions: Session[] = [...Array(10)].map(
       id: faker.random.uuid(),
       user: {
         id: faker.random.uuid(),
-        name: faker.name.firstName(),
+        name: faker.name.findName(),
         image: faker.image.avatar(),
       },
       from: from,
