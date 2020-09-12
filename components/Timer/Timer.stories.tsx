@@ -11,7 +11,7 @@ export default {
 const Template: Story<Props> = (args) => <Timer {...args} />;
 
 const from = new Date();
-from.setTime(from.valueOf() - 1000 * 3600 * 6.5); // milliseconds * 6.5 hours
+from.setTime(from.valueOf() - 1000 * 3600 * 3.3); // milliseconds * 3.3 hours
 
 const to = new Date();
 to.setTime(to.valueOf() - 1000 * 3600 * 3.2); // milliseconds * 3.2 hours

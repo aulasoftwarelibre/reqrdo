@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 
 export interface Props {
@@ -9,15 +10,13 @@ export const Timer: React.FunctionComponent<Props> = ({
   from,
   to = new Date(),
 }) => {
-  const delta = to.valueOf() - from.valueOf();
-  const hours = Math.floor(delta / 1000 / 3600);
-  const minutes = Math.floor(delta / 1000 / 60) - hours * 60;
+  const duration = moment.duration(moment(to).diff(moment(from)));
 
   return (
     <div className="inline-block text-white font-black text-5xl m-2 p-2">
-      {hours}
+      {duration.hours().toString().padStart(2, '0')}
       <span className="text-3xl text-white text-opacity-25 pr-2">h</span>
-      {minutes}
+      {duration.minutes().toString().padStart(2, '0')}
       <span className="text-3xl text-white text-opacity-25">m</span>
     </div>
   );
