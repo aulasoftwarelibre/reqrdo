@@ -1,9 +1,10 @@
 import classnames from 'classnames';
 import React from 'react';
+import Moment from 'react-moment';
 
 export interface Props {
   type: 'green' | 'red';
-  text: string;
+  text: Date;
 }
 
 export const Tag: React.FunctionComponent<Props> = ({ type, text }) => {
@@ -14,7 +15,7 @@ export const Tag: React.FunctionComponent<Props> = ({ type, text }) => {
   });
   return (
     <div className={classes} data-testid="tag">
-      {text}
+      <Moment date={text} format={'HH:mm'} />
     </div>
   );
 };

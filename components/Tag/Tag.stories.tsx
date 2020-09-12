@@ -13,11 +13,11 @@ const Template: Story<Props> = (args) => <Tag {...args} />;
 export const Green = Template.bind({});
 Green.args = {
   type: 'green',
-  text: '09:15',
+  text: new Date('2020-09-12 09:06:00'),
 };
 
 export const Red = Template.bind({});
 Red.args = {
   type: 'red',
-  text: '11:35',
+  text: new Date('2020-09-12 09:06:00'),
 };
