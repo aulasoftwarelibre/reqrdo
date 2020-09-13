@@ -15,7 +15,8 @@
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "test-all": "yarn lint && yarn type-check && yarn test",
+    "generate-keys": "node lib/crypt/generate-keys.js"
   },
   "dependencies": {
     "@rehooks/window-size": "^1.0.2",
