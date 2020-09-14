@@ -3,19 +3,37 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { InitOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
 
+import jwk from '../../../config/jwk/private.json';
 import ProviderUco from '../../../lib/auth/providers/uco';
+
+const env = process.env.NODE_ENV;
+const dev = env !== 'production';
 
 const options = {
   session: {
     jwt: true,
   },
-  // Configure one or more authentication providers
+  jwt: {
+    secret: process.env.SECRET,
+    signingKey: JSON.stringify(jwk),
+    verificationOptions: {
+      algorithms: ['RS256'],
+    },
+  },
   providers: [
     ProviderUco({
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
     }),
-    // TODO: Load this only in dev
+  ],
+
+  // A database is optional, but required to persist accounts in a database
+  database: process.env.DATABASE_URL,
+} as InitOptions;
+
+if (dev) {
+  options.providers = [
+    ...options.providers,
     Providers.Credentials({
       name: 'Credentials',
       credentials: {
@@ -31,7 +49,6 @@ const options = {
         }
 
         const user = {
-          id: 1,
           name: _credentials.username.split('@')[0],
           email: _credentials.username,
           image: gravatar.url(_credentials.username),
@@ -40,11 +57,8 @@ const options = {
         return Promise.resolve(user);
       },
     }),
-  ],
-
-  // A database is optional, but required to persist accounts in a database
-  database: process.env.DATABASE_URL,
-} as InitOptions;
+  ];
+}
 
 export default (req: NextApiRequest, res: NextApiResponse): Promise<void> =>
   NextAuth(req, res, options);

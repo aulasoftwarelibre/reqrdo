@@ -15,7 +15,8 @@
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "test-all": "yarn lint && yarn type-check && yarn test",
+    "generate-keys": "node lib/crypt/generate-keys.js"
   },
   "dependencies": {
     "@rehooks/window-size": "^1.0.2",
@@ -27,7 +28,8 @@
     "react": "16.13.1",
     "react-cool-onclickoutside": "^1.5.6",
     "react-dom": "16.13.1",
-    "react-moment": "^0.9.7"
+    "react-moment": "^0.9.7",
+    "use-http": "^1.0.13"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
@@ -64,6 +66,7 @@
     "faker": "^5.1.0",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
+    "jwk-to-pem": "^2.0.4",
     "konva": "^7.1.0",
     "lint-staged": "^10.3.0",
     "postcss-preset-env": "^6.7.0",
