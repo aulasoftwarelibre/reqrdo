@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { InitOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
 
-import jwk from '../../../config/jwk-private.json';
+import jwk from '../../../config/jwk/private.json';
 import ProviderUco from '../../../lib/auth/providers/uco';
 
 const env = process.env.NODE_ENV;
