@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "components/**"
+      - "client-web/components/**"
 
 jobs:
   pages:
