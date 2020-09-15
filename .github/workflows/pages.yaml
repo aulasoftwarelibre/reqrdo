@@ -5,12 +5,15 @@ on:
     branches:
       - master
     paths:
-      - 'components/**'
+      - "client-web/components/**"
 
 jobs:
   pages:
     name: Pages
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client-web
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

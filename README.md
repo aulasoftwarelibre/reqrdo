@@ -1,30 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img src="docs/logo.svg" width="400" alt="NosFaltaUno Logo" />
+</p>
 
-## Getting Started
+# reQRdo
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+This repository is one of the activities of the [Free Software Club from the University of Córdoba](https://uco.es/aulasoftwarelibre) and has only educational purposes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+"reQRdo" is a application to record the presence of persons in a room
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Installation
 
-## Learn More
+TBD
 
-To learn more about Next.js, take a look at the following resources:
+## Running the app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+TBD
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+NosFaltaUno is [AGPL3 licensed](LICENSE).
 
-## Deploy on Vercel
+## Credits
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- UI kit and logo based in [Time Tracker UI Kit by Rizki Mulyawan](https://dribbble.com/shots/14047362-FREE-TimePad-Time-Tracker-UI-Kit?utm_source=Clipboard_Shot&utm_campaign=mulyawan&utm_content=FREE%20TimePad%20-%20Time%20Tracker%20UI%20Kit&utm_medium=Social_Share)
