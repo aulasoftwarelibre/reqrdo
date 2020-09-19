@@ -12,7 +12,15 @@ This repository is one of the activities of the [Free Software Club from the Uni
 
 ## Installation
 
-TBD
+Create a docker-compose.override.yaml with traefik config:
+
+    version: "3"
+
+    services:
+      client-web:
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.reqrdo.rule=Host(`FQDN`)"
 
 ## Running the app
 
