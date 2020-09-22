@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -8,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RoomRepository::class)
+ *
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"}
@@ -20,17 +23,13 @@ class Room
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $name;
+    /** @ORM\Column(type="string", length=255, unique=true) */
+    private string $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $capacity;
+    /** @ORM\Column(type="integer") */
+    private int $capacity;
 
     public function getId(): ?int
     {
