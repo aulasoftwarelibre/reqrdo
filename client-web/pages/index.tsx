@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   }, []);
 
   async function init() {
-    const initStatus: Status = await get('/status');
+    const initStatus: Status = await get('/rooms/1');
     if (response.ok) setStatus(initStatus);
   }
 
