@@ -1,6 +1,9 @@
-name: Testing
+name: Client Web
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - "client-web/**"
 
 jobs:
   test:

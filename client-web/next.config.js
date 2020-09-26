@@ -2,8 +2,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/api/status',
-        destination: `${process.env.API_URL}/status`,
+        source: '/api/rooms/:slug',
+        destination: `${process.env.API_URL}/rooms/:slug`,
       },
     ];
   },
