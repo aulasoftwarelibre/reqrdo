@@ -293,6 +293,9 @@
             "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
         }
     },
+    "symfony/amqp-messenger": {
+        "version": "v5.1.5"
+    },
     "symfony/asset": {
         "version": "v5.1.5"
     },
@@ -345,6 +348,9 @@
         "version": "v2.2.0"
     },
     "symfony/doctrine-bridge": {
+        "version": "v5.1.5"
+    },
+    "symfony/doctrine-messenger": {
         "version": "v5.1.5"
     },
     "symfony/dom-crawler": {
@@ -423,6 +429,18 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "8a2675c061737658bed85102e9241c752620e575"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v5.1.5"
     },
@@ -480,6 +498,9 @@
     "symfony/polyfill-php80": {
         "version": "v1.18.1"
     },
+    "symfony/polyfill-uuid": {
+        "version": "v1.18.1"
+    },
     "symfony/process": {
         "version": "v5.1.5"
     },
@@ -493,6 +514,9 @@
         "version": "v5.1.5"
     },
     "symfony/proxy-manager-bridge": {
+        "version": "v5.1.5"
+    },
+    "symfony/redis-messenger": {
         "version": "v5.1.5"
     },
     "symfony/routing": {
@@ -583,6 +607,9 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
+    },
+    "symfony/uid": {
+        "version": "v5.1.5"
     },
     "symfony/validator": {
         "version": "4.3",
