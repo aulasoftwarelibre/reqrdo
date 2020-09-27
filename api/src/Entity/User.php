@@ -23,6 +23,14 @@ class User implements UserInterface
      */
     private int $id;
 
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     *
+     * @ApiProperty(identifier=true)
+     * @Groups({"user"})
+     */
+    private string $username;
+
     /** @ORM\Column(type="string", length=180, unique=true) */
     private string $email;
 
@@ -43,9 +51,9 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setUsername(string $username): self
     {
-        $this->email = $email;
+        $this->username = $username;
 
         return $this;
     }
@@ -57,7 +65,19 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     /**
