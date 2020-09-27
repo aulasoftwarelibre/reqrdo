@@ -22,6 +22,6 @@ class CheckRequestException extends Exception
 
     public static function becauseNoOpenCheckIsFound(): self
     {
-        return new self("No open check was found");
+        return new self('No open check was found');
     }
 }
