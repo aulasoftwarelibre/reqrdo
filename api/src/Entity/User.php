@@ -4,24 +4,47 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Uid\Uuid;
 
 use function array_unique;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="_user")
+ *
+ * @ApiResource(
+ *     normalizationContext={"groups"={"user", "user:read"}},
+ *     denormalizationContext={"groups"={"user", "user:write"}},
+ *     collectionOperations={},
+ *     itemOperations={
+ *         "get" = {"security"="object == user"}
+ *     }
+ * )
  */
 class User implements UserInterface
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="guid")
+     *
+     * @ApiProperty(identifier=false)
      */
-    private int $id;
+    private string $id;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     *
+     * @ApiProperty(identifier=true)
+     * @Groups({"user"})
+     */
+    private string $username;
 
     /** @ORM\Column(type="string", length=180, unique=true) */
     private string $email;
@@ -33,9 +56,38 @@ class User implements UserInterface
      */
     private array $roles = [];
 
-    public function getId(): ?int
+    /**
+     * @ORM\ManyToOne(targetEntity=Room::class, inversedBy="people")
+     *
+     * @Groups({"user"})
+     */
+    private ?Room $room;
+
+    public function __construct()
+    {
+        $this->id = (string) Uuid::v4();
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->username;
     }
 
     public function getEmail(): ?string
@@ -48,16 +100,6 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
     }
 
     /**
@@ -107,5 +149,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getRoom(): ?Room
+    {
+        return $this->room;
+    }
+
+    public function setRoom(?Room $room): self
+    {
+        $this->room = $room;
+
+        return $this;
     }
 }
