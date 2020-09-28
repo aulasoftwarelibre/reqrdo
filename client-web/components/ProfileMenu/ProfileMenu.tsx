@@ -6,7 +6,7 @@ import useOnclickOutside from 'react-cool-onclickoutside';
 import { ProfileMenuLink } from '.';
 
 export interface Props {
-  session?: Session;
+  session?: Session | null;
 }
 
 export const ProfileMenu: React.FunctionComponent<Props> = ({ session }) => {
@@ -17,7 +17,7 @@ export const ProfileMenu: React.FunctionComponent<Props> = ({ session }) => {
 
   return (
     <div
-      className="absolute z-10 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      className="absolute z-20 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
       date-testid="profile-menu"
     >
       {session && (
