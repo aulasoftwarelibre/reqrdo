@@ -24,7 +24,8 @@ use function array_unique;
  *     collectionOperations={},
  *     itemOperations={
  *         "get" = {"security"="object == user"}
- *     }
+ *     },
+ *     mercure=true
  * )
  */
 class User implements UserInterface
@@ -42,7 +43,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, unique=true)
      *
      * @ApiProperty(identifier=true)
-     * @Groups({"user"})
+     * @Groups({"user", "check"})
      */
     private string $username;
 
