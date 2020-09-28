@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200926233301 extends AbstractMigration
+final class Version20200928195129 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -27,13 +27,13 @@ final class Version20200926233301 extends AbstractMigration
         $this->addSql('CREATE TABLE "check" (id UUID NOT NULL, room_id UUID NOT NULL, person_id UUID NOT NULL, in_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, out_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_3C8EAC1354177093 ON "check" (room_id)');
         $this->addSql('CREATE INDEX IDX_3C8EAC13217BBB47 ON "check" (person_id)');
-        $this->addSql('CREATE TABLE room (id UUID NOT NULL, slug VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, capacity INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE room (id UUID NOT NULL, version INT DEFAULT 1 NOT NULL, slug VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, capacity INT NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_729F519B989D9B62 ON room (slug)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_729F519B5E237E06 ON room (name)');
         $this->addSql('ALTER TABLE _user ADD CONSTRAINT FK_D0B6A65254177093 FOREIGN KEY (room_id) REFERENCES room (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE "check" ADD CONSTRAINT FK_3C8EAC1354177093 FOREIGN KEY (room_id) REFERENCES room (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE "check" ADD CONSTRAINT FK_3C8EAC13217BBB47 FOREIGN KEY (person_id) REFERENCES _user (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql("INSERT INTO room (id, name, slug, capacity) VALUES ('e1d742f5-4747-463a-8c0a-c8b3452c34a9', 'Aula de Software Libre', 'asl', 10)");
+        $this->addSql("INSERT INTO room (id, name, slug, capacity, updated_at) VALUES ('e1d742f5-4747-463a-8c0a-c8b3452c34a9', 'Aula de Software Libre', 'asl', 10, NOW())");
     }
 
     public function down(Schema $schema) : void
