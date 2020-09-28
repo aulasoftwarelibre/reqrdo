@@ -16,6 +16,7 @@ module.exports = {
         },
         purple: {
           light: '#7012CE',
+          regular: '#1B143F',
           dark: '#292639',
         },
       },

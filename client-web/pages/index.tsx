@@ -1,37 +1,51 @@
+import { useMercure } from '@liinkiing/use-mercure';
 import { NextPage } from 'next';
 import React from 'react';
 import useFetch from 'use-http';
 
-import { CircularProgressBar, Title } from '../components';
-
-interface Status {
-  capacity: number;
-  occupation: number;
-}
+import { Checker, CircularProgressBar, Title } from '../components';
+import { Room } from '../lib/model';
 
 const Home: NextPage = () => {
-  const [status, setStatus] = React.useState<Status>();
-  const { get, response } = useFetch('/api');
+  const [room, setRoom] = React.useState<Room>();
+  const { get, response } = useFetch();
+
+  useMercure<Room>(
+    `${process.env.NEXT_PUBLIC_API_TOPIC}/rooms/asl`,
+    (message: Room) => {
+      const convert: Room = {
+        ...message,
+        people:
+          typeof message.people === 'object'
+            ? Object.values(message.people)
+            : message.people,
+      };
+      setRoom(convert);
+    }
+  );
 
   React.useEffect(() => {
     init();
   }, []);
 
   async function init() {
-    const initStatus: Status = await get('/rooms/1');
-    if (response.ok) setStatus(initStatus);
+    const initStatus: Room = await get('/rooms/asl');
+    if (response.ok) setRoom(initStatus);
   }
 
   return (
     <div className="flex min-h-full">
       <div className="m-auto space-y-5">
         <Title text="¿Cuánta gente hay en el aula?" />
-        {process.browser && status && (
-          <CircularProgressBar
-            range={status.capacity}
-            value={status.occupation}
-            radius={400}
-          />
+        {process.browser && room && (
+          <>
+            <CircularProgressBar
+              range={room.capacity}
+              value={room.occupation}
+              radius={400}
+            />
+            <Checker room={room} />
+          </>
         )}
       </div>
     </div>
