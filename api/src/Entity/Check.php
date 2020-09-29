@@ -9,6 +9,7 @@ use App\Repository\CheckRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Uuid;
 
 /**
@@ -16,8 +17,10 @@ use Symfony\Component\Uid\Uuid;
  * @ORM\Table(name="`check`")
  *
  * @ApiResource(
+ *     normalizationContext={"groups"={"check"}},
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     mercure=true
  * )
  */
 class Check
@@ -26,26 +29,40 @@ class Check
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Column(type="guid")
+     *
+     * @Groups({"check"})
      */
     private string $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Room::class)
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Groups({"check"})
      */
     private Room $room;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Groups({"check"})
      */
     private User $person;
 
-    /** @ORM\Column(type="datetime") */
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @Groups({"check"})
+     */
     private DateTimeInterface $inAt;
 
-    /** @ORM\Column(type="datetime", nullable=true) */
-    private ?DateTimeInterface $outAt;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"check"})
+     */
+    private ?DateTimeInterface $outAt = null;
 
     public function __construct()
     {
@@ -65,7 +82,7 @@ class Check
     public function close(): void
     {
         $this->setOutAt(new DateTimeImmutable());
-        $this->person->setRoom(null);
+        $this->room->removePerson($this->person);
     }
 
     public function getId(): ?string

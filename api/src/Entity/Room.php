@@ -7,18 +7,24 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RoomRepository;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=RoomRepository::class)
  *
  * @ApiResource(
+ *     normalizationContext={"groups"={"room"}},
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     mercure=true
  * )
+ * @SuppressWarnings(PHPMD.UnusedPrivateField)
  */
 class Room
 {
@@ -32,29 +38,51 @@ class Room
     private string $id;
 
     /**
+     * @ORM\Version()
+     * @ORM\Column(type="integer")
+     *
+     * @phpcsSuppress SlevomatCodingStandard.Classes.UnusedPrivateElements.UnusedProperty
+     */
+    private int $version;
+
+    /**
      * @ORM\Column(type="string", length=255, unique=true)
      *
      * @ApiProperty(identifier=true)
+     * @Groups({"room"})
      */
     private string $slug;
 
-    /** @ORM\Column(type="string", length=255, unique=true) */
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     *
+     * @Groups({"room", "check"})
+     */
     private string $name;
 
-    /** @ORM\Column(type="integer") */
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @Groups({"room"})
+     */
     private int $capacity;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="room")
      *
+     * @Groups({"room"})
      * @var Collection<int, User>
      */
     private Collection $people;
+
+    /** @ORM\Column(type="datetime") */
+    private DateTimeInterface $updatedAt;
 
     public function __construct()
     {
         $this->id     = (string) Uuid::v6();
         $this->people = new ArrayCollection();
+        $this->update();
     }
 
     public function getId(): ?string
@@ -98,6 +126,9 @@ class Room
         return $this;
     }
 
+    /**
+     * @Groups({"room"})
+     */
     public function getOccupation(): int
     {
         return $this->people->count();
@@ -116,6 +147,8 @@ class Room
         if (! $this->people->contains($person)) {
             $this->people[] = $person;
             $person->setRoom($this);
+
+            $this->update();
         }
 
         return $this;
@@ -129,8 +162,27 @@ class Room
             if ($person->getRoom() === $this) {
                 $person->setRoom(null);
             }
+
+            $this->update();
         }
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    private function update(): void
+    {
+        $this->updatedAt = new DateTimeImmutable();
     }
 }

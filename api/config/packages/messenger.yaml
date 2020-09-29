@@ -13,9 +13,9 @@ framework:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
 
-        buses:
-            command_bus:
-                middleware:
-                    - doctrine_ping_connection
-                    - doctrine_close_connection
-                    - doctrine_transaction
+#        buses:
+#            command_bus:
+#                middleware:
+#                    - doctrine_ping_connection
+#                    - doctrine_close_connection
+#                    - doctrine_transaction

@@ -4,7 +4,7 @@ import React from 'react';
 import { ProfileMenu } from '../ProfileMenu';
 
 export interface Props {
-  session?: Session;
+  session?: Session | null;
 }
 
 export const Navbar: React.FunctionComponent<Props> = ({ session }) => {
@@ -15,12 +15,12 @@ export const Navbar: React.FunctionComponent<Props> = ({ session }) => {
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0">
               <img
-                className="block lg:hidden h-8 w-auto"
+                className="block sm:hidden h-8 w-auto"
                 src="assets/img/ellipse.svg"
                 alt="Logo de la aplicación"
               />
               <img
-                className="hidden lg:block h-8 w-auto"
+                className="hidden sm:block h-8 w-auto"
                 src="assets/img/logo.svg"
                 alt="Logo de la aplicación"
               />
